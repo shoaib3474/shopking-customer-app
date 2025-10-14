@@ -48,6 +48,7 @@ dependencies:
   flutter_inappwebview: ^6.1.0+1
   win32: ^5.5.3
   archive: ^4.0.5
+  flutter_spinkit: ^5.2.2
 
 dev_dependencies:
   flutter_test:
