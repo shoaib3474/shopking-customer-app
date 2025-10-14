@@ -12,6 +12,7 @@ class SwapFormField extends StatelessWidget {
       this.emailController,
       this.phoneValidator,
       this.prefix,
+      this.emailPrefixIcon,
       this.emailValidator});
 
   final TextEditingController? phoneController;
@@ -21,6 +22,7 @@ class SwapFormField extends StatelessWidget {
   final String? Function(String?)? emailValidator;
 
   final Widget? prefix;
+  final Widget? emailPrefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,8 @@ class SwapFormField extends StatelessWidget {
             ? CustomFormField(
                 controller: emailController,
                 validator: emailValidator,
+                isPrefixIcon: true,
+                prefixIcon: emailPrefixIcon ,
               )
             : CustomPhoneFormField(
                 phoneController: phoneController,

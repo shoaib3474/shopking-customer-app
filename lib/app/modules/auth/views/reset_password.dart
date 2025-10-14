@@ -54,8 +54,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           alignment: Alignment.center,
           children: [
             Scaffold(
-              appBar: const AppBarWidget3(
-                text: '',
+              appBar:  AppBarWidget3(
+                text: "Reset Password".tr,
               ),
               backgroundColor: AppColor.primaryBackgroundColor,
               body: Padding(

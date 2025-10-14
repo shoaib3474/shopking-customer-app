@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget {
 
               // Dots Loader
               const SpinKitThreeBounce(
-                color: Colors.white, 
+                color: AppColor.primaryColor, 
                 size: 20.0,
               ),
             ],

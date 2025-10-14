@@ -67,18 +67,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        CustomText(
-                          text: "Sign Up".tr,
-                          color: AppColor.primaryColor,
-                          weight: FontWeight.w700,
-                          size: 26.sp,
-                        ),
-                        SizedBox(height: 12.h),
-                        CustomText(
+                         Container(
+                      width: double.infinity,
+                      height: 160.h,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(SvgIcon.logo, height: 50.h),
+                          SizedBox(height: 12.h),
+                           CustomText(
                           text: "Let's create your account".tr,
                           size: 16.sp,
                         ),
-                        SizedBox(height: 30.h),
+                        ],
+                      ),
+                    ),
+                       
                         Form(
                           key: formkey,
                           child: Column(
