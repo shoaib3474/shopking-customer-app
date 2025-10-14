@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopperz/widgets/custom_text.dart';
 import '../config/theme/app_color.dart';
 
 class CustomFormField extends StatelessWidget {
@@ -16,6 +17,7 @@ class CustomFormField extends StatelessWidget {
     this.prefixIcon,
     this.isPrefixIcon = false,
     this.enabled,
+    this.hintText,
 
   });
 
@@ -29,6 +31,7 @@ class CustomFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool isPrefixIcon;
   final bool? enabled;
+  final String? hintText;
   
 
 
@@ -48,6 +51,7 @@ class CustomFormField extends StatelessWidget {
         enabled: enabled,
         decoration: InputDecoration(
           // contentPadding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 14.h),
+          hint: CustomText(text: hintText ?? ""),
           suffixIcon: isSuffixIcon ? suffixIcon : const SizedBox(),
           prefixIcon: isPrefixIcon ? prefixIcon : const SizedBox(),
           prefix: SizedBox(width: 10.w),

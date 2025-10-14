@@ -376,4 +376,7 @@ Map<String, String> english = {
   "NO_PRODUCT_FOUND": "No product found!",
   "NO_SUB_CATEGORY_FOUND": "No sub-category found!",
   "INFO": "Info",
+  "Enter your password": "Enter your password",
+  "Enter your email": "Enter your email",
+  "Enter your phone": "Enter your phone",
 };

@@ -35,11 +35,13 @@ class SwapFormField extends StatelessWidget {
                 validator: emailValidator,
                 isPrefixIcon: true,
                 prefixIcon: emailPrefixIcon ,
+                hintText: "Enter your email".tr,
               )
             : CustomPhoneFormField(
                 phoneController: phoneController,
                 validator: phoneValidator,
                 prefix: prefix,
+                hintText: "Enter your phone".tr,
               );
       },
     );

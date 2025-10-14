@@ -117,9 +117,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ValidationRules().email(email),
                               phoneController: phoneController,
                               emailPrefixIcon: Padding(
-                                padding:  EdgeInsets.only(left: 6.w),
-                                child: Icon(Icons.email_outlined,
-                                    color: AppColor.textColor, size: 26.sp),
+                                padding: EdgeInsets.only(left: 6.w),
+                                child: Icon(
+                                  Icons.email_outlined,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
                               ),
                               prefix: Padding(
                                 padding: EdgeInsets.only(left: 10.w),
@@ -184,8 +187,27 @@ class _SignInScreenState extends State<SignInScreen> {
                             FormFieldTitle(title: "Password".tr),
                             SizedBox(height: 4.h),
                             CustomFormField(
-                              obsecure: false,
+                              hintText: "Enter your password".tr,
+                              obsecure: true,
+                              isSuffixIcon: true,
+                              suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
+                              ),
                               controller: passController,
+                              isPrefixIcon: true,
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 6.w),
+                                child: Icon(
+                                  Icons.lock_outline,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
+                              ),
                               validator: (password) =>
                                   ValidationRules().password(password),
                             ),
