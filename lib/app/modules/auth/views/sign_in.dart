@@ -53,12 +53,15 @@ class _SignInScreenState extends State<SignInScreen> {
         box.read('country_code') != null ||
         box.read('phone') != null) {
       mark = true;
-      emailController.text =
-          box.read('email') == null ? '' : box.read('email').toString();
-      passController.text =
-          box.read('password') == null ? '' : box.read('password').toString();
-      phoneController.text =
-          box.read('phone') == null ? '' : box.read('phone').toString();
+      emailController.text = box.read('email') == null
+          ? ''
+          : box.read('email').toString();
+      passController.text = box.read('password') == null
+          ? ''
+          : box.read('password').toString();
+      phoneController.text = box.read('phone') == null
+          ? ''
+          : box.read('phone').toString();
     } else {
       mark = false;
     }
@@ -81,237 +84,253 @@ class _SignInScreenState extends State<SignInScreen> {
             Scaffold(
               appBar: const AppBarWidget3(text: ''),
               backgroundColor: AppColor.primaryBackgroundColor,
-              body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: "Sing In".tr,
-                          color: AppColor.primaryColor,
-                          size: 26.sp,
-                          weight: FontWeight.w700,
-                        ),
-                        SizedBox(height: 12.h),
-                        CustomText(
-                          text: "Sign in to continue shopping".tr,
-                          size: 16.sp,
-                        ),
-                        SizedBox(height: 30.h),
-                        Form(
-                          key: formkey,
-                          child: Column(
-                            children: [
-                              const SwapFieldTitle(),
-                              SizedBox(height: 4.h),
-                              SwapFormField(
-                                emailController: emailController,
-                                emailValidator:
-                                    (email) => ValidationRules().email(email),
-                                phoneController: phoneController,
-                                prefix: Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
-                                  child: PopupMenuButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10.r),
-                                      ),
+              body: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 170.h,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(SvgIcon.logo, height: 50.h),
+                          SizedBox(height: 12.h),
+                          CustomText(
+                            text: "Sign in to continue shopping".tr,
+                            size: 16.sp,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            const SwapFieldTitle(),
+                            SizedBox(height: 4.h),
+                            SwapFormField(
+                              emailController: emailController,
+                              emailValidator: (email) =>
+                                  ValidationRules().email(email),
+                              phoneController: phoneController,
+                              emailPrefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 6.w),
+                                child: Icon(
+                                  Icons.email_outlined,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
+                              ),
+                              prefix: Padding(
+                                padding: EdgeInsets.only(left: 10.w),
+                                child: PopupMenuButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.r),
                                     ),
-                                    position: PopupMenuPosition.under,
-                                    itemBuilder:
-                                        (ctx) => List.generate(
-                                          authController
-                                              .countryCodeModel!
-                                              .data!
-                                              .length,
-                                          (index) => PopupMenuItem(
-                                            height: 32.h,
-                                            onTap: () async {
-                                              setState(() {
-                                                authController.countryCode =
-                                                    authController
-                                                        .countryCodeModel!
-                                                        .data![index]
-                                                        .callingCode
-                                                        .toString();
-                                              });
-                                            },
-                                            child: Text(
+                                  ),
+                                  position: PopupMenuPosition.under,
+                                  itemBuilder: (ctx) => List.generate(
+                                    authController
+                                        .countryCodeModel!
+                                        .data!
+                                        .length,
+                                    (index) => PopupMenuItem(
+                                      height: 32.h,
+                                      onTap: () async {
+                                        setState(() {
+                                          authController.countryCode =
                                               authController
                                                   .countryCodeModel!
                                                   .data![index]
                                                   .callingCode
-                                                  .toString(),
-                                              style: GoogleFonts.urbanist(
-                                                color: AppColor.textColor,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16.sp,
-                                              ),
-                                            ),
-                                          ),
+                                                  .toString();
+                                        });
+                                      },
+                                      child: Text(
+                                        authController
+                                            .countryCodeModel!
+                                            .data![index]
+                                            .callingCode
+                                            .toString(),
+                                        style: GoogleFonts.urbanist(
+                                          color: AppColor.textColor,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp,
                                         ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          authController.countryCode,
-                                          style: GoogleFonts.urbanist(
-                                            color: AppColor.textColor,
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(width: 5.w),
-                                        SvgPicture.asset(SvgIcon.down),
-                                      ],
+                                      ),
                                     ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        authController.countryCode,
+                                        style: GoogleFonts.urbanist(
+                                          color: AppColor.textColor,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(width: 5.w),
+                                      SvgPicture.asset(SvgIcon.down),
+                                    ],
                                   ),
                                 ),
-                                phoneValidator:
-                                    (phone) => ValidationRules().phone(phone),
                               ),
-                              SizedBox(height: 20.h),
-                              FormFieldTitle(title: "Password".tr),
-                              SizedBox(height: 4.h),
-                              CustomFormField(
-                                obsecure: true,
-                                controller: passController,
-                                validator:
-                                    (password) =>
-                                        ValidationRules().password(password),
+                              phoneValidator: (phone) =>
+                                  ValidationRules().phone(phone),
+                            ),
+                            SizedBox(height: 20.h),
+                            FormFieldTitle(title: "Password".tr),
+                            SizedBox(height: 4.h),
+                            CustomFormField(
+                              hintText: "Enter your password".tr,
+                              obsecure: true,
+                              isSuffixIcon: true,
+                              suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
                               ),
-                              SizedBox(height: 12.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        mark = !mark;
-                                      });
-                                    },
-                                    child: SvgPicture.asset(
-                                      mark == true
-                                          ? SvgIcon.checkdBox
-                                          : SvgIcon.checkBox,
-                                      height: 16.h,
-                                      width: 16.w,
-                                      color:
-                                          mark == true
-                                              ? AppColor.primaryColor
-                                              : null,
-                                    ),
+                              controller: passController,
+                              isPrefixIcon: true,
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 6.w),
+                                child: Icon(
+                                  Icons.lock_outline,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
+                              ),
+                              validator: (password) =>
+                                  ValidationRules().password(password),
+                            ),
+                            SizedBox(height: 12.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      mark = !mark;
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                    mark == true
+                                        ? SvgIcon.checkdBox
+                                        : SvgIcon.checkBox,
+                                    height: 16.h,
+                                    width: 16.w,
+                                    color: mark == true
+                                        ? AppColor.primaryColor
+                                        : null,
                                   ),
-                                  SizedBox(width: 8.w),
-                                  CustomText(
-                                    text: "Remember me".tr,
+                                ),
+                                SizedBox(width: 8.w),
+                                CustomText(
+                                  text: "Remember me".tr,
+                                  size: 14.sp,
+                                  weight: FontWeight.w400,
+                                ),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const ForgotPasswordScreen());
+                                  },
+                                  child: CustomText(
+                                    text: "Forgot Password".tr,
+                                    color: AppColor.primaryColor,
+                                    weight: FontWeight.w600,
                                     size: 14.sp,
-                                    weight: FontWeight.w400,
                                   ),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.to(
-                                        () => const ForgotPasswordScreen(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 24.h),
+                            PrimaryButton(
+                              text: "Sign In".tr,
+                              onTap: () {
+                                if (formkey.currentState!.validate()) {
+                                  if (swapController.isShowEmailField.value) {
+                                    if (mark == true) {
+                                      box.write('email', emailController.text);
+                                      box.write(
+                                        'password',
+                                        passController.text,
                                       );
-                                    },
-                                    child: CustomText(
-                                      text: "Forgot Password".tr,
-                                      color: AppColor.primaryColor,
-                                      weight: FontWeight.w600,
-                                      size: 14.sp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 24.h),
-                              PrimaryButton(
-                                text: "Sign In".tr,
-                                onTap: () {
-                                  if (formkey.currentState!.validate()) {
-                                    if (swapController.isShowEmailField.value) {
-                                      if (mark == true) {
-                                        box.write(
-                                          'email',
-                                          emailController.text,
-                                        );
-                                        box.write(
-                                          'password',
-                                          passController.text,
-                                        );
-                                      } else if (mark == false) {
-                                        box.remove('email');
-                                        box.remove('password');
-                                      }
-                                    } else {
-                                      if (mark == true) {
-                                        box.write(
-                                          'phone',
-                                          phoneController.text,
-                                        );
-                                        box.write(
-                                          'country_code',
-                                          authController.countryCode,
-                                        );
-                                        box.write(
-                                          'password',
-                                          passController.text,
-                                        );
-                                      } else if (mark == false) {
-                                        box.remove('phone');
-                                        box.remove('country_code');
-                                        box.remove('password');
-                                      }
+                                    } else if (mark == false) {
+                                      box.remove('email');
+                                      box.remove('password');
                                     }
-                                    swapController.isShowEmailField.value
-                                        ? authController.signInWithEmail(
+                                  } else {
+                                    if (mark == true) {
+                                      box.write('phone', phoneController.text);
+                                      box.write(
+                                        'country_code',
+                                        authController.countryCode,
+                                      );
+                                      box.write(
+                                        'password',
+                                        passController.text,
+                                      );
+                                    } else if (mark == false) {
+                                      box.remove('phone');
+                                      box.remove('country_code');
+                                      box.remove('password');
+                                    }
+                                  }
+                                  swapController.isShowEmailField.value
+                                      ? authController.signInWithEmail(
                                           email: emailController.text,
                                           password: passController.text,
                                         )
-                                        : authController.signInWithPhone(
+                                      : authController.signInWithPhone(
                                           phone: phoneController.text,
                                           countryCode:
                                               authController.countryCode,
                                           password: passController.text,
                                         );
-                                  } else {
-                                    debugPrint("Login is failed");
-                                  }
-                                },
-                              ),
-                              SizedBox(height: 20.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomText(
-                                    text: "Don't have an account?".tr,
-                                    color: const Color(0xFF6E7191),
+                                } else {
+                                  debugPrint("Login is failed");
+                                }
+                              },
+                            ),
+                            SizedBox(height: 20.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  text: "Don't have an account?".tr,
+                                  color: const Color(0xFF6E7191),
+                                  size: 16.sp,
+                                  weight: FontWeight.w500,
+                                ),
+                                SizedBox(width: 4.w),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const SignUpScreen());
+                                  },
+                                  child: CustomText(
+                                    text: "Sign Up".tr,
+                                    color: AppColor.primaryColor,
                                     size: 16.sp,
-                                    weight: FontWeight.w500,
+                                    weight: FontWeight.w700,
                                   ),
-                                  SizedBox(width: 4.w),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.to(() => const SignUpScreen());
-                                    },
-                                    child: CustomText(
-                                      text: "Sign Up".tr,
-                                      color: AppColor.primaryColor,
-                                      size: 16.sp,
-                                      weight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 200.h),
-                      ],
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 200.h),
+                  ],
                 ),
               ),
             ),

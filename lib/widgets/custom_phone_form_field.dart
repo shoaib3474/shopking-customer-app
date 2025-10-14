@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopperz/widgets/custom_text.dart';
 import '../config/theme/app_color.dart';
 
 class CustomPhoneFormField extends StatefulWidget {
@@ -8,11 +9,13 @@ class CustomPhoneFormField extends StatefulWidget {
       {super.key,
       this.phoneController,
       this.validator,
+      this.hintText,
       this.prefix});
 
   final TextEditingController? phoneController;
   final Widget? prefix;
   final String? Function(String?)? validator;
+  final String? hintText;
 
   @override
   State<CustomPhoneFormField> createState() => _CustomPhoneFormField();
@@ -31,6 +34,7 @@ class _CustomPhoneFormField extends State<CustomPhoneFormField> {
         cursorColor: AppColor.textColor,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
+          hint: CustomText(text: widget.hintText ?? ""),
           contentPadding: EdgeInsets.zero,
           prefixIcon: SizedBox(
             width: 85.w,
@@ -38,15 +42,15 @@ class _CustomPhoneFormField extends State<CustomPhoneFormField> {
           ),
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: AppColor.primaryColor),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           hintStyle: GoogleFonts.urbanist(
               color: AppColor.textColor,

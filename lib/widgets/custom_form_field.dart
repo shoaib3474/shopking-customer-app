@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopperz/widgets/custom_text.dart';
 import '../config/theme/app_color.dart';
 
 class CustomFormField extends StatelessWidget {
@@ -13,7 +14,11 @@ class CustomFormField extends StatelessWidget {
     this.onTap,
     this.suffixIcon,
     this.isSuffixIcon = false,
+    this.prefixIcon,
+    this.isPrefixIcon = false,
     this.enabled,
+    this.hintText,
+
   });
 
   final TextEditingController? controller;
@@ -23,7 +28,12 @@ class CustomFormField extends StatelessWidget {
   final void Function()? onTap;
   final Widget? suffixIcon;
   final bool isSuffixIcon;
+  final Widget? prefixIcon;
+  final bool isPrefixIcon;
   final bool? enabled;
+  final String? hintText;
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +50,22 @@ class CustomFormField extends StatelessWidget {
         keyboardType: keyboardType,
         enabled: enabled,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.zero,
+          // contentPadding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 14.h),
+          hint: CustomText(text: hintText ?? ""),
           suffixIcon: isSuffixIcon ? suffixIcon : const SizedBox(),
+          prefixIcon: isPrefixIcon ? prefixIcon : const SizedBox(),
           prefix: SizedBox(width: 10.w),
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColor.inactiveColor),
-            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: AppColor.primaryColor),
+            borderRadius: BorderRadius.circular(32.r),
           ),
           hintStyle: GoogleFonts.urbanist(
             color: AppColor.textColor,

@@ -73,4 +73,6 @@ class SvgIcon {
   static String get delete => 'assets/icons/delete.svg';
   static String get thik => 'assets/icons/thik.svg';
   static String get thikCircle => 'assets/icons/tick-circle.svg';
+  static String get email => 'assets/icons/email.svg';
+  static String get password => 'assets/icons/password.svg';
 }
