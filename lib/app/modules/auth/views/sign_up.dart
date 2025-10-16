@@ -33,6 +33,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final formkey = GlobalKey<FormState>();
 
+  // Password visibility state
+  bool _obscurePassword = true;
+
   @override
   void initState() {
     super.initState();
@@ -67,22 +70,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                         Container(
-                      width: double.infinity,
-                      height: 160.h,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(SvgIcon.logo, height: 50.h),
-                          SizedBox(height: 12.h),
-                           CustomText(
-                          text: "Let's create your account".tr,
-                          size: 16.sp,
+                        Container(
+                          width: double.infinity,
+                          height: 160.h,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(SvgIcon.logo, height: 50.h),
+                              SizedBox(height: 12.h),
+                              CustomText(
+                                text: "Let's create your account".tr,
+                                size: 16.sp,
+                              ),
+                            ],
+                          ),
                         ),
-                        ],
-                      ),
-                    ),
-                       
                         Form(
                           key: formkey,
                           child: Column(
@@ -91,17 +93,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               SizedBox(height: 4.h),
                               CustomFormField(
                                 controller: authController.nameController,
-                                validator:
-                                    (name) => ValidationRules().name(name),
+                                prefixIcon: Icon(
+                                  Icons.person_outline,
+                                  color: AppColor.textColor,
+                                  size: 26.sp,
+                                ),
+                                validator: (name) =>
+                                    ValidationRules().name(name),
                               ),
                               SizedBox(height: 20.h),
                               const SwapFieldTitle(),
                               SizedBox(height: 4.h),
+                              // Provide the email prefix icon similar to sign in
                               SwapFormField(
                                 emailController: authController.emailController,
-                                emailValidator:
-                                    (email) => ValidationRules().email(email),
+                                emailValidator: (email) =>
+                                    ValidationRules().email(email),
                                 phoneController: authController.phoneController,
+                                emailPrefixIcon: Padding(
+                                  padding: EdgeInsets.only(left: 6.w),
+                                  child: Icon(
+                                    Icons.email_outlined,
+                                    color: AppColor.textColor,
+                                    size: 26.sp,
+                                  ),
+                                ),
                                 prefix: Padding(
                                   padding: EdgeInsets.only(left: 10.w),
                                   child: PopupMenuButton(
@@ -111,38 +127,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                     position: PopupMenuPosition.under,
-                                    itemBuilder:
-                                        (ctx) => List.generate(
+                                    itemBuilder: (ctx) => List.generate(
+                                      authController
+                                          .countryCodeModel!
+                                          .data!
+                                          .length,
+                                      (index) => PopupMenuItem(
+                                        height: 32.h,
+                                        onTap: () async {
+                                          setState(() {
+                                            authController.countryCode =
+                                                authController
+                                                    .countryCodeModel!
+                                                    .data![index]
+                                                    .callingCode
+                                                    .toString();
+                                          });
+                                        },
+                                        child: Text(
                                           authController
                                               .countryCodeModel!
-                                              .data!
-                                              .length,
-                                          (index) => PopupMenuItem(
-                                            height: 32.h,
-                                            onTap: () async {
-                                              setState(() {
-                                                authController.countryCode =
-                                                    authController
-                                                        .countryCodeModel!
-                                                        .data![index]
-                                                        .callingCode
-                                                        .toString();
-                                              });
-                                            },
-                                            child: Text(
-                                              authController
-                                                  .countryCodeModel!
-                                                  .data![index]
-                                                  .callingCode
-                                                  .toString(),
-                                              style: GoogleFonts.urbanist(
-                                                color: AppColor.textColor,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16.sp,
-                                              ),
-                                            ),
+                                              .data![index]
+                                              .callingCode
+                                              .toString(),
+                                          style: GoogleFonts.urbanist(
+                                            color: AppColor.textColor,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
+                                      ),
+                                    ),
                                     child: Row(
                                       children: [
                                         Text(
@@ -159,18 +174,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                   ),
                                 ),
-                                phoneValidator:
-                                    (phone) => ValidationRules().phone(phone),
+                                phoneValidator: (phone) =>
+                                    ValidationRules().phone(phone),
                               ),
                               SizedBox(height: 20.h),
                               FormFieldTitle(title: "Password".tr),
                               SizedBox(height: 4.h),
+                              // Password field with prefix icon and show/hide suffix button
                               CustomFormField(
                                 controller: authController.passController,
-                                obsecure: true,
-                                validator:
-                                    (password) =>
-                                        ValidationRules().password(password),
+                                obsecure: _obscurePassword,
+                                isPrefixIcon: true,
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.only(left: 6.w),
+                                  child: Icon(
+                                    Icons.lock_outline,
+                                    color: AppColor.textColor,
+                                    size: 26.sp,
+                                  ),
+                                ),
+                                isSuffixIcon: true,
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscurePassword = !_obscurePassword;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    _obscurePassword
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: AppColor.textColor,
+                                    size: 26.sp,
+                                  ),
+                                ),
+                                validator: (password) =>
+                                    ValidationRules().password(password),
                               ),
                               SizedBox(height: 24.h),
                               PrimaryButton(
@@ -179,37 +218,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   if (formkey.currentState!.validate()) {
                                     swapController.isShowEmailField.value
                                         ? authController
-                                            .registrationValidationWithEmail(
-                                              name:
-                                                  authController
-                                                      .nameController
-                                                      .text,
-                                              email:
-                                                  authController
-                                                      .emailController
-                                                      .text,
-                                              password:
-                                                  authController
-                                                      .passController
-                                                      .text,
-                                            )
+                                              .registrationValidationWithEmail(
+                                                name: authController
+                                                    .nameController
+                                                    .text,
+                                                email: authController
+                                                    .emailController
+                                                    .text,
+                                                password: authController
+                                                    .passController
+                                                    .text,
+                                              )
                                         : authController
-                                            .registrationValidationWithPhone(
-                                              name:
-                                                  authController
-                                                      .nameController
-                                                      .text,
-                                              phone:
-                                                  authController
-                                                      .phoneController
-                                                      .text,
-                                              countryCode:
-                                                  authController.countryCode,
-                                              password:
-                                                  authController
-                                                      .passController
-                                                      .text,
-                                            );
+                                              .registrationValidationWithPhone(
+                                                name: authController
+                                                    .nameController
+                                                    .text,
+                                                phone: authController
+                                                    .phoneController
+                                                    .text,
+                                                countryCode:
+                                                    authController.countryCode,
+                                                password: authController
+                                                    .passController
+                                                    .text,
+                                              );
                                   } else {
                                     debugPrint("Something is wrong.");
                                   }
