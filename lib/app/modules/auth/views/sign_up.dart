@@ -93,10 +93,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               SizedBox(height: 4.h),
                               CustomFormField(
                                 controller: authController.nameController,
-                                prefixIcon: Icon(
-                                  Icons.person_outline,
-                                  color: AppColor.textColor,
-                                  size: 26.sp,
+                                isPrefixIcon: true,
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.only(left: 6.w),
+                                  child: Icon(
+                                    Icons.person_outline,
+                                    color: AppColor.textColor,
+                                    size: 26.sp,
+                                  ),
                                 ),
                                 validator: (name) =>
                                     ValidationRules().name(name),
