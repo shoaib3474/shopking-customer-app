@@ -27,13 +27,14 @@ class TextWidget extends StatelessWidget {
     return Text(
       '$text',
       textAlign: textAlign,
-      style: GoogleFonts.urbanist(
+      style: GoogleFonts.inter(
+          wordSpacing: 0.5.w,
           color: color,
           fontWeight: fontWeight,
           fontSize: fontSize,
           decoration: decoration,
           height: 1.h,
-          decorationThickness: 5),
+          decorationThickness: 4),
       maxLines: maxLines,
       overflow: overflow,
     );

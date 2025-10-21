@@ -199,8 +199,8 @@ class ProductWidget extends StatelessWidget {
                         ? TextWidgetWithCurrency(
                           text: currentPrice ?? '0',
                           color: AppColor.textColor,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
                         )
                         : SizedBox(),
                     SizedBox(width: isOffer == false ? 8.w : 0),
@@ -209,16 +209,16 @@ class ProductWidget extends StatelessWidget {
                           children: [
                             TextWidgetWithCurrency(
                               text: discountPrice ?? '0',
-                              color: AppColor.textColor,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w700,
+                              color: AppColor.primaryColor,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                             SizedBox(width: 8.w),
                             TextWidgetWithCurrency(
                               text: currentPrice ?? '0',
-                              color: AppColor.redColor,
+                              color: AppColor.textColor,
                               fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                               decoration: TextDecoration.lineThrough,
                             ),
                           ],

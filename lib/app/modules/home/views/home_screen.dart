@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shopperz/app/modules/auth/controller/auth_controler.dart';
 import 'package:shopperz/app/modules/auth/views/sign_in.dart';
+import 'package:shopperz/app/modules/cart/views/cart_screen.dart';
 import 'package:shopperz/app/modules/category/views/category_wise_product_screen.dart';
 import 'package:shopperz/app/modules/filter/controller/filter_controller.dart';
 import 'package:shopperz/app/modules/home/controller/brand_controller.dart';
@@ -86,9 +88,9 @@ class HomeScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(48.h),
           child: AppBarWidget(
             isSearch: true,
-            svgIcon: SvgIcon.search,
+            svgIcon: SvgIcon.bag,
             onTap: () {
-              Get.to(() => const SearchScreen());
+              Get.to(() =>  CartScreen());
             },
           ),
         ),
@@ -118,6 +120,35 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                 
+                //  searchbar 
+                  GestureDetector(
+                    onTap: () {
+                       Get.to(() =>  SearchScreen()); 
+                        },
+                    child: Container(
+                                  margin: EdgeInsets.only(bottom: 15),
+                                  padding: EdgeInsets.all(18),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.addressColor, 
+                                    borderRadius: BorderRadius.circular(8), 
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                    SvgPicture.asset(
+                      SvgIcon.search ?? "",
+                      height: 16.h,
+                      width: 16.w, 
+                      color: AppColor.deSelectedColor,
+                    ), 
+                                   SizedBox(width: 12,), 
+                    Text("Search products".tr, style: TextStyle(color: AppColor.deSelectedColor,)), 
+                                    ],
+                                  ),
+                                 ),
+                  ),  
+                  
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -145,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                                 false
                             ? Padding(
                               padding: EdgeInsets.only(right: 16.w),
-                              child: TitleWidget(text: 'CATEGORIES'.tr),
+                              child: TitleWidget(text: 'CATEGORIES'.tr, ),
                             )
                             : const SizedBox();
                       }),
@@ -164,6 +195,7 @@ class HomeScreen extends StatelessWidget {
                             ? const CategoryWidget()
                             : const SizedBox();
                       }),
+                      
                       const PromotionBanner(),
                     ],
                   ),

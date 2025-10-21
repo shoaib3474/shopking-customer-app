@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:shopperz/app/modules/category/bindings/category_bindings.dart';
-
 import 'package:shopperz/app/modules/home/bindings/home_bindings.dart';
 import 'package:shopperz/app/modules/home/views/home_screen.dart';
 import 'package:shopperz/app/modules/language/views/language_change_screen.dart';
@@ -11,10 +10,10 @@ import 'package:shopperz/config/routes/app_routes.dart';
 import '../../app/modules/language/bindings/language_binding.dart';
 import '../../app/modules/splash/views/splash_screen.dart';
 
-class AppPages {
-  AppPages._();
+ class AppPages {
+   AppPages._();
 
-  static String initial = "/splash/";
+   static String initial = "/splash/";
 
   static final pages = [
     GetPage(
@@ -42,4 +41,4 @@ class AppPages {
       binding: LanguageBindings(),
     )
   ];
-}
+ }

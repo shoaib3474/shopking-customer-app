@@ -54,16 +54,17 @@ class _CartWidgetState extends State<CartWidget> {
     return Column(
       children: [
         SizedBox(
-          height: 115.h,
+          height: 90.h,
           width: double.infinity,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
                 imageUrl: widget.productImage ??
                     "https://img.freepik.com/free-vector/healthy-food-packaging-set_1284-23304.jpg",
                 imageBuilder: (context, imageProvider) => Container(
-                  height: double.infinity,
-                  width: 92.w,
+                  height: 75.h,
+                  width: 60.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
                     image: DecorationImage(
@@ -72,134 +73,106 @@ class _CartWidgetState extends State<CartWidget> {
                 ),
               ),
               SizedBox(
-                width: 12.w,
+                width: 15.w,
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
                       text: widget.title ?? '',
                       color: AppColor.textColor,
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
+                   
                     SizedBox(
-                      height: 6.h,
+                      height: 10.h,
                     ),
-                    TextWidget(
-                      text: widget.finalVariation,
-                      color: AppColor.textColor,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
+
                     Row(
                       children: [
                         TextWidgetWithCurrency(
                           text: widget.currentPrice,
-                          color: AppColor.textColor,
-                          fontSize: 16.sp,
+                          color: AppColor.primaryColor,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w600,
                         ),
                         SizedBox(
-                          width: 8.w,
+                          width: 10.w,
                         ),
                         widget.isOffer == true
                             ? TextWidgetWithCurrency(
                                 text: widget.discountPrice ?? '0',
                                 color: AppColor.quantityError,
                                 fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 decoration: TextDecoration.lineThrough)
                             : const SizedBox(),
+                      SizedBox(width: 5.w), 
+                       TextWidget(
+                      text: widget.finalVariation,
+                      color: AppColor.textColor,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                       ],
                     ),
                     SizedBox(
-                      height: 12.h,
+                      height: 5.h,
                     ),
+
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          height: 30.h,
-                          width: 86.w,
-                          decoration: BoxDecoration(
-                              color: AppColor.cartColor,
-                              borderRadius: BorderRadius.circular(20.r)),
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(4.r),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: widget.decrement,
-                                    child: SvgPicture.asset(
-                                        widget.decrementIconvalue < 2
-                                            ? SvgIcon.cart1
-                                            : SvgIcon.cart3,
-                                        height: 20.h,
-                                        width: 20.w),
-                                  ),
-                                  TextWidget(
-                                    text: widget.quantity,
-                                    color: AppColor.textColor,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  InkWell(
-                                    onTap: widget.increment,
-                                    child: SvgPicture.asset(
-                                        widget.stock! >
-                                                widget.incrementValue!.toInt()
-                                            ? SvgIcon.cart2
-                                            : SvgIcon.cart1,
-                                        height: 20.h,
-                                        width: 20.w),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                        InkWell(
+                          onTap: widget.decrement,
+                          child: SvgPicture.asset(
+                              widget.decrementIconvalue < 2
+                                  ? SvgIcon.cart1
+                                  : SvgIcon.cart3,
+                              height: 24.h,
+                              width: 24.w),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        TextWidget(
+                          text: widget.quantity,
+                          color: AppColor.textColor,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        InkWell(
+                          onTap: widget.increment,
+                          child: SvgPicture.asset(
+                              widget.stock! >
+                                      widget.incrementValue!.toInt()
+                                  ? SvgIcon.cart2
+                                  : SvgIcon.cart1,
+                              height: 24.h,
+                              width: 24.w),
                         ),
                         const Spacer(),
                         InkWell(
                           onTap: widget.remove,
                           child: Container(
                             height: 30.h,
-                            width: 79.w,
+                            width: 30.w,
                             decoration: BoxDecoration(
-                                color: AppColor.removeColor,
-                                borderRadius: BorderRadius.circular(20.r)),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(4.r),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(SvgIcon.remove,
-                                        height: 16.h, width: 16.w),
-                                    SizedBox(
-                                      width: 4.w,
-                                    ),
-                                    TextWidget(
-                                      text: 'Remove'.tr,
-                                      color: AppColor.removeTextColor,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                    )
-                                  ],
+                                color: AppColor.primaryColor.withOpacity(0.9),
+                                shape: BoxShape.circle
                                 ),
-                              ),
-                            ),
+                            child:  Center(
+                              child: SvgPicture.asset(SvgIcon.remove,
+                                          height: 16.h, width: 16.w, 
+                                          color: AppColor.whiteColor,
+                                          ),
+                            ) ,
                           ),
                         )
                       ],
@@ -211,7 +184,7 @@ class _CartWidgetState extends State<CartWidget> {
           ),
         ),
         SizedBox(
-          height: 16.h,
+          height: 13.h,
         ),
         Container(
           height: 1.h,

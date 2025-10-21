@@ -27,8 +27,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 120.h,
+      decoration: BoxDecoration(
+        color: AppColor.whiteColor,
+      ),
       width: double.infinity,
-      color: AppColor.whiteColor,
       child: Obx(() {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -48,19 +50,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     );
                   },
                   child: Container(
-                    height: 85.h,
-                    width: 72.w,
+                    height: 90.h,
+                    width: 80.w,
                     decoration: BoxDecoration(
                       color: AppColor.whiteColor,
                       borderRadius: BorderRadius.circular(8.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          offset: const Offset(0, 0),
-                          blurRadius: 32.r,
-                          spreadRadius: 0,
-                        ),
-                      ],
+                      border: Border(bottom: BorderSide(
+          color: AppColor.grayColor.withOpacity(0.4), width: 2.w
+        ))
                     ),
                     child: Column(
                       children: [
@@ -84,7 +81,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         ),
                         Expanded(
                           child: Container(
-                            height: 22.h,
+                            height: 28.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: AppColor.whiteColor,
@@ -98,7 +95,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 text: category[index].name,
                                 textAlign: TextAlign.center,
                                 color: AppColor.titleTextColor,
-                                fontSize: 12.sp,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.w600,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,

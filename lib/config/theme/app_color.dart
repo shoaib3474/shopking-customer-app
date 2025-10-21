@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const Color primaryColor = Color(0xffF23E14);
+
+  static const Color primaryColor = Color(0xFFF05454);
   static const Color favColor = Color(0xFFFFFFFF);
   static const Color primaryColor1 = Color(0xffFFF4F1);
-  static const Color primaryBackgroundColor = Color(0xffFFFFFF);
+  static const Color primaryBackgroundColor = Color(0xFFFFFFFF);
   static const Color titleTextColor = Color(0xff1F1F39);
-  static const Color textColor = Color(0xff1F1F39);
+  static const Color textColor = Color(0xFF2E3A59);
   static const Color textColor1 = Color(0xff6E7191);
   static const Color whiteColor = Color(0xffFFFFFF);
   static const Color blackColor = Color(0xff000000);
@@ -20,7 +21,7 @@ class AppColor {
   static const Color blueColor = Color(0xff1F1F39);
   static const Color blueColor1 = Color(0xff0072F4);
   static const Color deSelectedColor = Color(0xff6E7191);
-  static const Color borderColor = Color(0xffEFF0F6);
+  static const Color borderColor = Color(0xFFE0E0E0);
   static const Color orangeColor = Color(0xffF23E14);
   static const Color cartColor = Color(0xffF7F7FC);
   static const Color removeColor = Color(0xffFFF4F4);
