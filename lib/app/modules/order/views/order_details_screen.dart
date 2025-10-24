@@ -19,8 +19,8 @@ import '../../../../config/theme/app_color.dart';
 import '../../../../widgets/textwidget_with_currency.dart';
 import '../../shipping/widgets/order_processing_pickup.dart';
 
-class OrderDetailsScreen extends StatefulWidget {
-  const OrderDetailsScreen({super.key, this.id});
+class OrderDetailsScreen extends StatefulWidget { 
+  const OrderDetailsScreen({ super.key, this.id} ) ;  
   final String? id;
 
   @override
