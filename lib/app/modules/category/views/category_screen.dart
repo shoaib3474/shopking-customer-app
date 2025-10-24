@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shopperz/app/modules/category/controller/category_tree_controller.dart';
 import 'package:shopperz/app/modules/category/views/category_wise_product_screen.dart';
 import 'package:shopperz/app/modules/category/widgets/category_widget.dart';
+import 'package:shopperz/app/modules/home/controller/category_controller.dart';
 import 'package:shopperz/app/modules/sub_category/views/sub_category_screen.dart';
 import 'package:shopperz/utils/images.dart';
 import 'package:shopperz/widgets/loader/loader.dart';
@@ -22,10 +23,12 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final categoryTreeController = Get.put(CategoryTreeController());
+  final categoryController = Get.find<CategoryController>();
 
   @override
   void initState() {
     categoryTreeController.fetchCategoryTree();
+    categoryController.fetchCategory(); 
     super.initState();
   }
 
@@ -48,9 +51,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
           () => Stack(
             alignment: Alignment.center,
             children: [
+              
               RefreshIndicator(
                 onRefresh: () async {
                   categoryTreeController.fetchCategoryTree();
+                  categoryController.fetchCategory(); 
                 },
                 color: AppColor.primaryColor,
                 child: SingleChildScrollView(
@@ -89,20 +94,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               ),
                             ),
                           )
-                          : ListView.builder(
-                            itemCount:
-                                categoryTreeController.categoryTreeList.length,
+                          : GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20 , 
+                              mainAxisSpacing: 20, 
+                              
+                            ),
+                             itemCount: categoryController.categoryModel.value.data!.length ,
+                                // categoryTreeController.categoryTreeList.length,
                             shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final categoryTree =
+                             physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                               final categoryTree =
                                   categoryTreeController.categoryTreeList;
-                              return CategoryList(
-                                text: categoryTree[index].name.toString(),
+                                  final category = categoryController.categoryModel.value.data!;
+                              return  CategoryList(
+                                image: category[index].thumb.toString(),
+                                // text: categoryTree[index].name.toString(),
+                                text: category[index].name.toString() ,
                                 onTapProduct: () {
                                   Get.to(
                                     () => CategoryWiseProductScreen(
-                                      categoryTreeModel: categoryTree[index],
+                                      categoryModel: category[index],
                                     ),
                                     transition: Transition.fade,
                                   );
@@ -115,9 +129,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     transition: Transition.fade,
                                   );
                                 },
-                              );
+                              ); ;
                             },
-                          );
+                          ); 
                     }),
                   ),
                 ),
@@ -125,6 +139,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
               categoryTreeController.isLoading.value
                   ? const Center(child: LoaderCircle())
                   : const SizedBox(),
+
+                  // TextButton(onPressed: (){
+                    // categoryTreeController.fetchCategoryTree(); 
+                // print(" category list : ${categoryTreeController.categoryTreeList}") ;
+              // }, child: Text("${categoryTreeController.categoryTreeList}")) ,
+
             ],
           ),
         ),

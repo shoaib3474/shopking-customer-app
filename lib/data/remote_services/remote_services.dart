@@ -123,6 +123,7 @@ class RemoteServices {
     if (response.statusCode == 200) {
       final data = response.data as List<dynamic>;
       return Right(data.map((e) => CategoryTreeModel.fromJson(e)).toList());
+      
     } else {
       return const Left("Something went wrong.");
     }

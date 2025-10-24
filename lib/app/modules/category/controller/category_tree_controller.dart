@@ -14,6 +14,7 @@ class CategoryTreeController extends GetxController {
     data.fold((error) => error.toString(), (categoryTree) {
       categoryTreeList.value = categoryTree;
     });
+    print("category list : ${categoryTreeList}"); 
   }
 
   @override

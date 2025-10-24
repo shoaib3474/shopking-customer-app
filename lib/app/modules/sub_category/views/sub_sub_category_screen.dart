@@ -70,6 +70,7 @@ class _SubSubCategoryScreenState extends State<SubSubCategoryScreen> {
                       itemBuilder: (context, index) {
                         var data = widget.categoryTreeModel!.children![index];
                         return CategoryList(
+                          image: "image",
                           text: data.name.toString(),
                           onTapProduct: () {
                             Get.to(

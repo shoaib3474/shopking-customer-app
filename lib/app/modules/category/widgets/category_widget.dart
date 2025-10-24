@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,10 +14,12 @@ class CategoryList extends StatelessWidget {
   const CategoryList(
       {super.key,
       required this.text,
+      required this.image, 
       this.onTapSubCategory,
       this.onTapProduct});
 
   final String text;
+  final String image ;
   final Function()? onTapProduct;
 
   final Function()? onTapSubCategory;
@@ -23,47 +28,66 @@ class CategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(color: AppColor.borderColor, width: 1.sp))),
-      child: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 8,
-              child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        color: AppColor.whiteColor,
+          border: Border.all( color: AppColor.borderColor, width: 1.sp)),
+      child: Column(
+        children: [
+            //    add category image here
+               InkWell(
                 onTap: onTapProduct,
-                child: SizedBox(
-                  height: 70.h,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextWidget(
-                      text: text,
-                      color: AppColor.textColor,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                 child: CachedNetworkImage(
+                            imageUrl: image,
+                            imageBuilder:
+                                (context, imageProvider) =>
+                                 Container(
+                                  height: 80,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8.r),
+                                      topRight: Radius.circular(8.r),
+                                    ),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                          ),
+               ),
+           
+            SizedBox(height: 3.h,), 
+
+          Expanded(
+            child: InkWell(
+              onTap: onTapProduct,
+              child: Center(
+                child: TextWidget(
+                  text: text,
+                  color: const Color.fromRGBO(46, 58, 89, 1),
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: InkWell(
-                onTap: onTapSubCategory,
-                child: SizedBox(
-                  height: 70.h,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.r),
-                    child: SvgPicture.asset(
-                      SvgIcon.forward,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
+         
+         SizedBox(height: 0.h,), 
+
+           InkWell(
+            onTap: onTapSubCategory,
+           child: Container(
+          height: 32.h, 
+          width:double.infinity,
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: AppColor.borderColor, width: 1.w)), 
+          ),
+          child: Center(child: Text('View Sub Categories', textAlign: TextAlign.center, style:TextStyle(fontSize: 10 , color: AppColor.textColor) ,)) ,
+             ),
         ),
+          
+        ],
       ),
     );
   }

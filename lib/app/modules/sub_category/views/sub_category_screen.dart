@@ -15,7 +15,7 @@ import '../../../../widgets/textwidget.dart';
 class SubCategoryScreen extends StatefulWidget {
   const SubCategoryScreen({super.key, this.categoryTreeModel});
   final CategoryTreeModel? categoryTreeModel;
-
+  
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
 }
@@ -63,13 +63,19 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         ),
                       ),
                     )
-                    : ListView.builder(
+                    :  GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 20 , 
+                            mainAxisSpacing: 20, 
+                            ),
                       itemCount: widget.categoryTreeModel!.children!.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         var data = widget.categoryTreeModel!.children![index];
                         return CategoryList(
+                          image: "image",
                           text: data.name.toString(),
                           onTapProduct: () {
                             Get.to(
