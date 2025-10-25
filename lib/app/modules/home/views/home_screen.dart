@@ -175,8 +175,9 @@ class HomeScreen extends StatelessWidget {
                                     ?.isNotEmpty ??
                                 false
                             ? Padding(
-                              padding: EdgeInsets.only(right: 16.w),
-                              child: TitleWidget(text: 'CATEGORIES'.tr, ),
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child:  
+                           TitleWidget(text: 'CATEGORIES'.tr, ),
                             )
                             : const SizedBox();
                       }),

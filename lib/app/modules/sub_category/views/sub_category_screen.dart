@@ -63,7 +63,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         ),
                       ),
                     )
-                    :  GridView.builder(
+                    : 
+                     GridView.builder(
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 20 , 
@@ -74,25 +75,39 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         var data = widget.categoryTreeModel!.children![index];
-                        return CategoryList(
-                          image: "image",
-                          text: data.name.toString(),
-                          onTapProduct: () {
-                            Get.to(
+                        return
+                         InkWell(
+                          onTap: () {
+                             Get.to(
                               () => CategoryWiseProductScreen(
                                 categoryTreeModel: data,
                               ),
                               transition: Transition.fade,
                             );
                           },
-                          onTapSubCategory: () {
-                            Get.to(
-                              () =>
-                                  SubSubCategoryScreen(categoryTreeModel: data),
-                              transition: Transition.fade,
-                            );
-                          },
-                        );
+                           child: Container(
+                                 decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(20),
+                                   color: AppColor.whiteColor,
+                                     border: Border.all( color: AppColor.borderColor, width: 1.sp)),
+                                 child: Center(
+                                   child: TextWidget(
+                                     text: data.name.toString(),
+                                     color: const Color.fromRGBO(46, 58, 89, 1),
+                                     fontSize: 12.sp,
+                                     fontWeight: FontWeight.w600,
+                                   ),
+                                 ),
+                               ),
+                         );
+                          // onTapSubCategory: () {
+                          //   Get.to(
+                          //     () =>
+                          //         SubSubCategoryScreen(categoryTreeModel: data),
+                          //     transition: Transition.fade,
+                          //   );
+                          // },
+                        
                       },
                     ),
               ],

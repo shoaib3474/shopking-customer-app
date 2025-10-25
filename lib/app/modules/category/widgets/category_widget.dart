@@ -26,7 +26,8 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppColor.whiteColor,
@@ -41,7 +42,7 @@ class CategoryList extends StatelessWidget {
                             imageBuilder:
                                 (context, imageProvider) =>
                                  Container(
-                                  height: 80,
+                                  height: 100,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
@@ -75,17 +76,17 @@ class CategoryList extends StatelessWidget {
          
          SizedBox(height: 0.h,), 
 
-           InkWell(
-            onTap: onTapSubCategory,
-           child: Container(
-          height: 32.h, 
-          width:double.infinity,
-          decoration: BoxDecoration(
-            border: Border(top: BorderSide(color: AppColor.borderColor, width: 1.w)), 
-          ),
-          child: Center(child: Text('View Sub Categories', textAlign: TextAlign.center, style:TextStyle(fontSize: 10 , color: AppColor.textColor) ,)) ,
-             ),
-        ),
+        //    InkWell(
+        //     onTap: onTapSubCategory,
+        //    child: Container(
+        //   height: 32.h, 
+        //   width:double.infinity,
+        //   decoration: BoxDecoration(
+        //     border: Border(top: BorderSide(color: AppColor.borderColor, width: 1.w)), 
+        //   ),
+        //   child: Center(child: Text('View Sub Categories', textAlign: TextAlign.center, style:TextStyle(fontSize: 10 , color: AppColor.textColor) ,)) ,
+        //      ),
+        // ),
           
         ],
       ),
